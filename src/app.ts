@@ -1,6 +1,7 @@
 // typescript doesn't actually have access to the DOM during development
 // thats why we get a warning above
 
+import { Payment } from "./classes/Payments.js";
 import { Invoice } from "./classes/invoice.js";
 import { HasFormatter } from "./interfaces/HasFormatter.js";
 
@@ -27,9 +28,18 @@ const amount = document.querySelector("#amount") as HTMLInputElement;
 // add event listener for the form submit
 form.addEventListener("submit", (e: Event) => {
   e.preventDefault();
-  console.log(type.value, toFrom.value, details.value, amount.valueAsNumber);
+
+  let doc: HasFormatter;
+  if (type.value === "invoice") {
+    doc = new Invoice(toFrom.value, details.value, amount.valueAsNumber);
+  } else
+    [(doc = new Payment(toFrom.value, details.value, amount.valueAsNumber))];
+
+  // console.log(type.value, toFrom.value, details.value, amount.valueAsNumber);
+  console.log(doc);
 });
 
+//   *************
 const invOne = new Invoice("mario", "work on the mario website", 250);
 const invTwo = new Invoice("luigi", "work on the luigi website", 300);
 
@@ -70,7 +80,7 @@ const me: IsPerson = {
     console.log(text);
   },
   spend(amount: number): number {
-    console.log("I spent", amount);
+    console.log("I spent ", amount);
     return amount;
   },
 };
@@ -87,3 +97,14 @@ console.log(me);
 
 let docOne: HasFormatter;
 let docTwo: HasFormatter;
+
+docOne = new Invoice("yoshi", "web work", 250);
+docTwo = new Payment("martio", "plumbing work", 200);
+
+let docs: HasFormatter[] = [];
+docs.push(docOne);
+docs.push(docTwo);
+
+console.log("docs", docs);
+
+// to compile and run: tsc -w

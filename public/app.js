@@ -1,5 +1,6 @@
 // typescript doesn't actually have access to the DOM during development
 // thats why we get a warning above
+import { Payment } from "./classes/Payments.js";
 import { Invoice } from "./classes/invoice.js";
 // the bang operator at the end of the query selector will remove the warning!
 const anchor = document.querySelector("a");
@@ -20,8 +21,16 @@ const amount = document.querySelector("#amount");
 // add event listener for the form submit
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-    console.log(type.value, toFrom.value, details.value, amount.valueAsNumber);
+    let doc;
+    if (type.value === "invoice") {
+        doc = new Invoice(toFrom.value, details.value, amount.valueAsNumber);
+    }
+    else
+        [(doc = new Payment(toFrom.value, details.value, amount.valueAsNumber))];
+    // console.log(type.value, toFrom.value, details.value, amount.valueAsNumber);
+    console.log(doc);
 });
+//   *************
 const invOne = new Invoice("mario", "work on the mario website", 250);
 const invTwo = new Invoice("luigi", "work on the luigi website", 300);
 console.log(invOne, invTwo);
@@ -47,7 +56,7 @@ const me = {
         console.log(text);
     },
     spend(amount) {
-        console.log("I spent", amount);
+        console.log("I spent ", amount);
         return amount;
     },
 };
@@ -59,3 +68,10 @@ greetPerson(me);
 console.log(me);
 let docOne;
 let docTwo;
+docOne = new Invoice("yoshi", "web work", 250);
+docTwo = new Payment("martio", "plumbing work", 200);
+let docs = [];
+docs.push(docOne);
+docs.push(docTwo);
+console.log("docs", docs);
+// to compile and run: tsc -w
