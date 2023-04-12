@@ -57,3 +57,5 @@ const greetPerson = (person) => {
 };
 greetPerson(me);
 console.log(me);
+let docOne;
+let docTwo;

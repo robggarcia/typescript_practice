@@ -2,6 +2,7 @@
 // thats why we get a warning above
 
 import { Invoice } from "./classes/invoice.js";
+import { HasFormatter } from "./interfaces/HasFormatter.js";
 
 // the bang operator at the end of the query selector will remove the warning!
 const anchor = document.querySelector("a")!;
@@ -83,3 +84,6 @@ const greetPerson = (person: IsPerson) => {
 greetPerson(me);
 
 console.log(me);
+
+let docOne: HasFormatter;
+let docTwo: HasFormatter;
