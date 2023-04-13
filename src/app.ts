@@ -158,4 +158,34 @@ const docSix: Resource<string[]> = {
 
 console.log(docFive, docSix);
 
+// ENUMS - allow us to store a set of constants (keywords)
+// and associate them with a numeric value
+enum ItemType {
+  BOOK,
+  AUTHOR,
+  FILM,
+  DIRECTOR,
+  PERSON,
+}
+
+interface Item<T> {
+  uid: number;
+  itemType: ItemType;
+  data: T;
+}
+
+const itemOne: Item<object> = {
+  uid: 1,
+  itemType: ItemType.BOOK,
+  data: { title: "name of the wind" },
+};
+
+const itemTwo: Item<object> = {
+  uid: 10,
+  itemType: ItemType.PERSON,
+  data: { name: "yoshi" },
+};
+
+console.log(itemOne, itemTwo);
+
 // to compile and run: tsc -w

@@ -107,4 +107,25 @@ const docSix = {
     data: ["potatoes", "milk", "eggs"],
 };
 console.log(docFive, docSix);
+// ENUMS - allow us to store a set of constants (keywords)
+// and associate them with a numeric value
+var ItemType;
+(function (ItemType) {
+    ItemType[ItemType["BOOK"] = 0] = "BOOK";
+    ItemType[ItemType["AUTHOR"] = 1] = "AUTHOR";
+    ItemType[ItemType["FILM"] = 2] = "FILM";
+    ItemType[ItemType["DIRECTOR"] = 3] = "DIRECTOR";
+    ItemType[ItemType["PERSON"] = 4] = "PERSON";
+})(ItemType || (ItemType = {}));
+const itemOne = {
+    uid: 1,
+    itemType: ItemType.BOOK,
+    data: { title: "name of the wind" },
+};
+const itemTwo = {
+    uid: 10,
+    itemType: ItemType.PERSON,
+    data: { name: "yoshi" },
+};
+console.log(itemOne, itemTwo);
 // to compile and run: tsc -w
