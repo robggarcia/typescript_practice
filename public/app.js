@@ -80,4 +80,31 @@ let docs = [];
 docs.push(docOne);
 docs.push(docTwo);
 console.log("docs", docs);
+// GENERICS - allow us to create reusable blocks of code
+// which can be reused with different types
+// <T> is the generic that captures whatever item is passed into our function
+// it will know all of the corresponding properties as well
+// the extend keyword then limits what types can be passed in
+const addUID = (obj) => {
+    let uid = Math.floor(Math.random() * 1000);
+    return Object.assign(Object.assign({}, obj), { uid });
+};
+let docThree = addUID({ name: "yoshi", age: 40 });
+console.log(docThree.name, docThree.uid);
+const docFour = {
+    uid: 1,
+    resourceName: "person",
+    data: "shaun",
+};
+const docFive = {
+    uid: 2,
+    resourceName: "person",
+    data: { name: "rob" },
+};
+const docSix = {
+    uid: 3,
+    resourceName: "shopping list",
+    data: ["potatoes", "milk", "eggs"],
+};
+console.log(docFive, docSix);
 // to compile and run: tsc -w
