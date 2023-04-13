@@ -3,6 +3,7 @@
 
 import { Payment } from "./classes/Payments.js";
 import { Invoice } from "./classes/invoice.js";
+import { ListTemplate } from "./classes/listTemplate.js";
 import { HasFormatter } from "./interfaces/HasFormatter.js";
 
 // the bang operator at the end of the query selector will remove the warning!
@@ -25,6 +26,10 @@ const toFrom = document.querySelector("#tofrom") as HTMLInputElement;
 const details = document.querySelector("#details") as HTMLInputElement;
 const amount = document.querySelector("#amount") as HTMLInputElement;
 
+// list template instance
+const ul = document.querySelector("ul")!; // ! tells typescript that we will definitely find the ul element on the page
+const list = new ListTemplate(ul);
+
 // add event listener for the form submit
 form.addEventListener("submit", (e: Event) => {
   e.preventDefault();
@@ -32,8 +37,11 @@ form.addEventListener("submit", (e: Event) => {
   let doc: HasFormatter;
   if (type.value === "invoice") {
     doc = new Invoice(toFrom.value, details.value, amount.valueAsNumber);
-  } else
-    [(doc = new Payment(toFrom.value, details.value, amount.valueAsNumber))];
+  } else {
+    doc = new Payment(toFrom.value, details.value, amount.valueAsNumber);
+  }
+
+  list.render(doc, type.value, "end");
 
   // console.log(type.value, toFrom.value, details.value, amount.valueAsNumber);
   console.log(doc);
